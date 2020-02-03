@@ -1,0 +1,14 @@
+RewriteEngine on
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+
+RewriteRule ^(.*)$ index.php?id=$1 [L,QSA]
+#RewriteRule ^Dashboard/$    /index.php?id=Dashboard [L,QSA]
+#RewriteRule ^Pago/$    /index.php?id=Ingreso [L,QSA]
+#RewriteRule ^Configuracion/$    /index.php?id=Configuracion [L,QSA]
+#RewriteRule ^Inicio/$    /index.php [L,QSA]
+#RewriteRule ^Login/$    /index.php?id=Login [L,QSA]
+#RewriteRule ^Comentarios/$    /index.php?id=Comentarios [L,QSA]
+
+

@@ -1,0 +1,59 @@
+@font-face {
+font-family: 'thebit';
+src: url('../font/CaviarDreams.ttf');
+src: url('../font/CaviarDreams_Bold.ttf');
+src: url('../font/CaviarDreams_BoldItalic.ttf');
+src: url('../font/CaviarDreams_Italic.ttf');
+}
+
+.fondo{
+	/*background-color: #424242;*/
+}
+
+.contUno,.contDos,.contTres{
+	margin:10px auto;
+	padding: 20px 10px;
+	text-align: center;
+	font-family: 'thebit', Arial, Helvetica;
+	color: white;
+}
+
+.contUno h1,.contDos h1,.contTres h1{
+	font-size: 5.5rem;
+}
+
+.contUno h1,.contDos h1,.contTres h1,.contUno h2,.contDos h2,.contTres h2,.contUno h3,.contDos h3,.contTres h3{
+	padding: 0px;
+	margin: 0px;
+}
+
+.cont h1{
+	font-size: 5.5rem;
+	padding-top: 25px;
+	text-align: center;
+	font-family: 'thebit', Arial, Helvetica;
+	/*padding-top: 130px;*/
+}
+
+.cont h4{
+	font-size: 1.5rem;
+	text-align: center;
+	font-family: 'thebit', Arial, Helvetica;
+}
+
+
+.contUno{
+	background-color: #ff6600;
+}
+
+.contDos{
+	background-color: #006cff;
+}
+
+.contTres{
+	background-color: #34a038;
+}
+
+.cont{
+	margin-top: 15px;
+}

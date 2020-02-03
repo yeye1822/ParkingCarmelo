@@ -1,0 +1,60 @@
+.containerMain{
+	margin-top: 70px;
+	padding-top: 30px;
+}
+
+.plataForm{
+	height: 200px;
+	width: 80%;
+	background-color: #f7b802;
+	margin: 1em auto;
+	border-radius: 20px;
+}
+
+.placeText{
+	font-size: 100px;
+	padding-top: 35px;
+	text-align: center;
+}
+
+.inputPlace{
+	width: 100%;
+}
+
+.topMovil{
+	padding-top: 3em !important;
+	margin-top: 3em !important;
+}
+
+.txtInput{
+	margin-top: 50px;
+	padding-top: 40px;
+}
+
+.inputTxt{
+	margin: 10px 0px;
+}
+
+@media(orientation:portrait){
+	.containerMain{
+		margin-top: 10px;
+	}
+	.placeText{
+		font-size: 70px;
+		padding-top: 48px;
+	}
+	.plataForm{
+		width: 95%;
+		height: 170px;
+
+	}
+
+	.topMovil{
+		padding-top: 1em !important;
+	}
+
+	.txtInput{
+		margin-top: 0px;
+		padding-top: 0px;
+	}
+}
