@@ -20,58 +20,72 @@ function payParking(data){
 	var placa = document.getElementById("placa"+data).value
 	var minutos = document.getElementById("minutos"+data).value;
 	var valor = document.getElementById("valor"+data).value;
+	var idRegistro = document.getElementById("idRegistro"+data).value;
 	var message;
-	var horas;
-	var valorHtml = valor.split("-");
-
-
-
+	var horas, days, hor, dia, noche, amout;
+	var valorHtml = valor.split("-"); 
 
 	if(valor == 0 ){
 		Swal.fire('Seleccione un tipo de pago');
 		return;
 	}
 
-	if((valorHtml[1].toUpperCase().indexOf("NOCHE")>0) || (valorHtml[1].toUpperCase().indexOf("DIA")>0)){
-		if(parseInt(hora) > 0) dia = parseInt(dia) + 1; 
-		if((valorHtml[1].toUpperCase().indexOf("NOCHE")>0)){
-			message = "Hoal";
-		}
+	if(valorHtml[0] == 1) valorHtml[0] = 0;
+	if(parseInt(minutos) > 0) horas = parseInt(hora) + 1 ; 
+	if(parseInt(dia) > 0) horas = parseInt(horas) + (parseInt(dia) * 24); 
 
-		if((valorHtml[1].toUpperCase().indexOf("DIA")>0)){
-			message = "Hola";
-		}
+	days = horas/24;
+	hora = horas > 24 ? horas-1 : hora;
 
-	}else{
-		if(valorHtml[0] == 1) valorHtml[0] = 0;
-		if(parseInt(minutos) > 0) horas = parseInt(hora) + 1 ; 
-		if(parseInt(dia) > 0) horas = parseInt(horas) + (parseInt(dia) * 24); 
+	if(valorHtml[1].toUpperCase().indexOf("NOCHE") >= 0){
+		message = "Tiempo transcurrido: "+Math.ceil(days)+" Noches, Valor parqueo: "+new Intl.NumberFormat("de-DE").format(valorHtml[0] * Math.ceil(days));
+		noche = Math.ceil(days);
+		amout = new Intl.NumberFormat("de-DE").format(valorHtml[0] * Math.ceil(days));
+	 }else if((valorHtml[1].toUpperCase().indexOf("DIA") >= 0)  || (valorHtml[1].toUpperCase().indexOf("DÍA") >= 0)){
+		message = "Tiempo transcurrido: "+Math.ceil(days)+ " Días, Valor parqueo: "+ new Intl.NumberFormat("de-DE").format(valorHtml[0] * Math.ceil(days));
+		dia = Math.ceil(days);
+		amout = new Intl.NumberFormat("de-DE").format(valorHtml[0] * Math.ceil(days));
+	 }else{
+		message = "Tiempo transcurrido: "+horas+ " Horas, Valor parqueo: "+new Intl.NumberFormat("de-DE").format(valorHtml[0] * horas);
+		hor = horas;
+		amout = new Intl.NumberFormat("de-DE").format(valorHtml[0] * horas);
+	 }
 
-		hora = horas > 24 ? horas-1 : hora;
-
-		message = "Tiempo de parqueo: "+horas+" Horas\nValor del parqueo: "+ new Intl.NumberFormat("de-DE").format(valorHtml[0] * horas) +" Pesos\nTotal tiempo transcurrido: "+hora+":"+minutos+" Horas";
-	}
-
-	alert(message);
-
-	// Swal.fire({
-	//   title: 'Verifica bien los datos, antes de continuar?',
-	//   text: "You won't be able to revert this!",
-	//   icon: 'warning',
-	//   showCancelButton: true,
-	//   confirmButtonColor: '#3085d6',
-	//   cancelButtonColor: '#d33',
-	//   confirmButtonText: 'Yes, delete it!'
-	// }).then((result) => {
-	//   if (result.value) {
-	//     Swal.fire(
-	//       'Deleted!',
-	//       'Your file has been deleted.',
-	//       'success'
-	//     )
-	//   }
-	// })
-
+	 if(horas > 24 && valorHtml[1].toUpperCase().indexOf("HORAS") >= 0 ){
+		Swal.fire({
+		 title: "Alerta, Se recomienda realizar el pago por días",
+		 text: "Cancele la operación o dale continuar para realizar el pago por "+valorHtml[1],
+		 icon: 'warning',
+		 showCancelButton: true,
+		 cancelButtonText: 'Cancelar',
+		 confirmButtonColor: '#3085d6',
+		 cancelButtonColor: '#d33',	
+		 confirmButtonText: 'Continuar'
+		}).then((result) => {
+			if (result.value) {
+				Swal.fire(
+					'Valor a Pagar!',
+					message
+				).then((response) => {
+					if(response.value){
+						alert("voy a almacenar los datos"+idRegistro);
+						// aca va el metodo nuevo
+					}
+				}) 
+			}
+		})
+	 }else{
+		Swal.fire(
+			'Valor a Pagar!',
+			message
+		).then((response) => {
+			if(response.value){
+				alert("voy a almacenar los datos"+idRegistro
+					);
+				// aca va el metodo nuevo
+			}
+		})
+	 }
 }
 
 

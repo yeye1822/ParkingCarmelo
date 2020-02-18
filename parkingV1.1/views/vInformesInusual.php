@@ -24,7 +24,7 @@ class InformeInusual{
                     </thead>
                     <tbody>
                         <?php 
-          
+           
                       $obj = new InformesControllers();
                       $data = $obj->seeInformesInusual($fecha);
 
@@ -68,6 +68,7 @@ class InformeInusual{
                         echo "<input type='hidden' id='hora".$i."' value='".$interval->format('%H')."'>";
                         echo "<input type='hidden' id='minutos".$i."' value='".$interval->format('%I')."'>";
                         echo "<input type='hidden' id='placa".$i."' value='".$key[0]."'>";
+                        echo "<input type='hidden' id='idRegistro".$i."' value='".$key[6]."'>";
                        
               
                         echo "</tr>";
