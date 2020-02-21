@@ -110,7 +110,7 @@ src: url('../font/CaviarDreams_Italic.ttf');
 }
 
 #writeTime{
-	font-size: 169px;
+	font-size: 150px;
 	text-align: center;
 	margin: 0;width: 90%;
 }

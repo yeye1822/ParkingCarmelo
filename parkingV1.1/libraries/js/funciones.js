@@ -2,12 +2,11 @@
 
 function writeTimeReal(data){
 	if(data.value.length == 0){
-		document.getElementById("writeTime").innerHTML = "*** ***";
+		document.getElementById("writeTime").innerHTML = "******";
 	}else{
 		document.getElementById("writeTime").innerHTML = data.value.toUpperCase();
 	}
 }
-
 
 
 function payParking(data){

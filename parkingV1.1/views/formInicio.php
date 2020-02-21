@@ -54,7 +54,7 @@
 				    			<div class="col-sm-1"></div>
 				    			<div class="col-sm-10 licensePlate">
 				    				<div class="licensePlateIn">
-				    					<h1 id="writeTime">*** ***</h1>
+				    					<h1 id="writeTime">******</h1>
 				    				</div>
 				    			</div>
 				    			<div class="col-sm-1"></div>
