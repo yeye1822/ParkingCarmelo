@@ -1,18 +1,5 @@
 
-/*function window_onload(){
-	var conten = document.getElementsByClassName("cont");
-	var conten1 = document.getElementsByClassName("cont1");
 
-	//for de los div de los porcentajes
-	for(var i = 0; i < conten1.length; i++){
-		conten1[i].style.height = "200px";
-	}
-
-	//for de los div de las graficas
-	for(var i = 0; i < conten.length; i++){
-		conten[i].style.height = "400px";
-	}
-}*/
 function writeTimeReal(data){
 	if(data.value.length == 0){
 		document.getElementById("writeTime").innerHTML = "*** ***";
@@ -41,7 +28,7 @@ function payParking(data){
 	}
 
 	if(valorHtml[0] == 1) valorHtml[0] = 0;
-	if(parseInt(minutos) > 0) horas = parseInt(hora) + 1 ; 
+	if(parseInt(minutos) >= 0) horas = parseInt(hora) + 1 ; 
 	if(parseInt(dia) > 0) horas = parseInt(horas) + (parseInt(dia) * 24); 
 
 	days = horas/24;
