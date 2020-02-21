@@ -115,8 +115,8 @@ class dashboard{
 			    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
 			      <div class="navbar-nav mr-auto ml-auto text-center">
 			      	<a class="nav-item nav-link active" href="Inicio">Inicio</a>
-			      	<a class="nav-item nav-link " href="Comentarios">Comentarios</a>
-			      	<a class="nav-item nav-link " href="InformesInusual">Informes</a>
+			      	<!-- <a class="nav-item nav-link " href="Comentarios">Comentarios</a> -->
+			      	<a class="nav-item nav-link " href="InformesInusual">Pagos</a>
 			        <a class="nav-item nav-link " href="Login">Login</a>			
 			      </div>
 			    </div>
@@ -223,6 +223,18 @@ class dashboard{
 			    <script src="libraries/js/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
 			    <script src="libraries/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 			    <script src="libraries/js/bootstraps.min.js"></script>
+
+			    <div class="inParking position">
+			    	<a href="Inicio">
+			    		<img src="libraries/image/carParking.png" class="imgFloat">
+			    	</a>
+			    </div>
+			    <div class="payment position">
+			    	<a href="InformesInusual">
+			    		<img src="libraries/image/payment.png" class="imgFloat">
+			    	</a>
+			    </div>
+
 			  </body>
 			</html>
 		<?php

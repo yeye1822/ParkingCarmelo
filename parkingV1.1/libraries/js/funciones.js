@@ -13,6 +13,16 @@
 		conten[i].style.height = "400px";
 	}
 }*/
+function writeTimeReal(data){
+	if(data.value.length == 0){
+		document.getElementById("writeTime").innerHTML = "*** ***";
+	}else{
+		document.getElementById("writeTime").innerHTML = data.value.toUpperCase();
+	}
+}
+
+
+
 function payParking(data){
 
 	var dia = document.getElementById("dia"+data).value;

@@ -57,3 +57,90 @@ src: url('../font/CaviarDreams_Italic.ttf');
 .cont{
 	margin-top: 15px;
 }
+
+.position{
+	width: 50px;
+	height: 50px;
+	position: fixed;
+	border-radius: 50px;
+	padding: 10px;
+}
+
+.inParking{
+	background-color: green;
+	bottom: 30px;
+	right: 30px;
+}
+
+.payment{
+	background-color: orange;
+	bottom: 90px;
+	right: 30px;	
+}
+
+.imgFloat{
+	width: 100%
+}
+
+.licensePlate{
+	background-color: yellow;
+	width: 90%;
+	min-height: 250px;
+	border-radius: 10px;
+	display: flex;
+  	align-items: stretch;
+  	margin: 0 auto;
+}
+
+.licensePlateIn{
+	background-color: yellow;
+	margin: 1em auto;
+	border-style: solid;
+	border-color: black;
+	width: 100%;
+	border-radius: 10px;
+}
+
+.typeIn{
+	text-align: right;
+}
+
+.typeOut{
+	text-align: left;
+}
+
+#writeTime{
+	font-size: 169px;
+	text-align: center;
+	margin: 0;width: 90%;
+}
+
+@media only screen and (max-width: 960px) {
+  .licensePlate {
+    	min-height: 180px;
+  }
+
+  #writeTime{
+		font-size: 60px;
+		margin: 29px 0 0 9px;
+	}
+}
+
+@media only screen and (max-width: 575px) {
+  .licensePlate {
+    	min-height: 140px;
+  }
+
+  .typeIn{
+		text-align: center;
+	}
+
+	.typeOut{
+		text-align: center;
+	}
+
+	#writeTime{
+		font-size: 54px;
+		margin: 20px;
+	}
+}
