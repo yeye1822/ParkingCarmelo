@@ -7,6 +7,12 @@ class InformesControllers{
        return $obj->carInusual($fecha);
 	}
 
+	public function carInusualInfo($fecha){
+
+	   $obj = new InformCar();
+       return $obj->carInusualInfo($fecha);
+	}
+
 	public function seeReportMonthly($fecha){
 		$obj = new InformCar();
 		return $obj->carMensual($fecha);

@@ -28,7 +28,7 @@
 						      <form method="post" action='controllers/registroDatos.php'>
 						          <div class="input-group">
 						              <span class="input-group-addon"><i class="fa fa-car"></i></span>
-						              <input type="text" class="form-control text-uppercase" name="placa" placeholder="Escribe tu placa" id='placa' required autocomplete="off" onkeyup="writeTimeReal(this)">
+						              <input type="text" class="form-control text-uppercase" name="placa" placeholder="Escribe tu placa" id='placa' maxlength="6" required autocomplete="off" onkeyup="writeTimeReal(this)">
 						          </div> 
 
 								<div class="row mt-3"> 

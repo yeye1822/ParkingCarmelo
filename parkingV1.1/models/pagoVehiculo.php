@@ -30,6 +30,14 @@ class pagoVehiculo{
 		echo $sql = "DELETE FROM pagoscarro WHERE placaPagoFK = '$datos[0]' AND fechaPago = '$datos[1]'";
 		return $result = mysqli_query($conexion,$sql);
 	}
+
+	public function modificarIngreso($datos){
+		$con = new conectar();
+		$conexion = $con->conexion();
+		$sql = "UPDATE registrocarro SET idSecuenciaSalida = '$datos[1]', fechaSalida = '$datos[2]', idConceptoFK = '$datos[3]', PagoCarro = '$datos[4]', amount = '$datos[5]' WHERE idRegistro = '$datos[0]'";
+		return $result = mysqli_query($conexion,$sql);
+	}
+
 }
 
  ?>

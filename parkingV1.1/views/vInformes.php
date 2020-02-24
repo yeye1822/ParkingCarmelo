@@ -33,6 +33,7 @@
                         <th>Entrada</th>
                         <th>Salida</th>
                         <th>Concepto</th>
+                        <th>Valor</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -42,10 +43,17 @@
                        $fecha = isset($_POST['dateTxt']) ? $_POST['dateTxt'] : date('Y-m-d');
           
                       $obj = new InformesControllers();
-                      $data = $obj->seeInformesInusual($fecha);
+                      $data = $obj->carInusualInfo($fecha);
 
                       foreach($data as $key){
-                        echo "<tr>";
+
+                        if($key[7] == 1){
+                          $color = "green";
+                        }else{
+                          $color = "orange";
+                        }
+
+                        echo "<tr style='background-color:".$color.";'>";
                         echo "<td>".$key[0]."</td>";
                         echo "<td>".date_format(date_create($key[1]), 'd/m/Y g:i A')."</td>";
 
@@ -54,8 +62,10 @@
                         }else{
                            echo "<td>".date_format(date_create($key[2]), 'd/m/Y g:i A')."</td>";
                         }
-                       
-                        echo "<td>".$key[3]."</td>";
+                        echo "<td>".$key[8]."</td>";
+                        echo "<td>".$key[9]."</td>";
+                     
+                        
                         echo "</tr>";
                       }
 
@@ -67,6 +77,7 @@
                           <th>Entrada</th>
                           <th>Salida</th>
                           <th>Concepto</th>
+                          <th>Valor</th>
                         </tr>
                     </tfoot>
                   </table>
