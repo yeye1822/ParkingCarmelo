@@ -8,6 +8,8 @@ require_once 'models/mConsultConcept.php';
 
 require_once 'controllers/cInformes.php';
 require_once 'controllers/cConsultConcept.php';
+require_once 'controllers/cConfig.php';
+require_once 'controllers/cConcepto.php';
 
 require_once 'views/dashboard.php';
 require_once 'views/formInicio.php';
@@ -68,6 +70,13 @@ if (!isset($_SESSION['nombreUsuario'])){
 			$estructura->menu();
 			$formConfiguracion->menu();
 			$estructura->estructura_pie();	
+			break;
+		case 'Config':
+			$formConfig = new ControllerConfig();
+			$estructura->estructura_head();
+			$estructura->menu();
+			$formConfig->viewConfig();
+			$estructura->estructura_pie2();	
 			break;
 		case 'Salir':
 			$estructura->estructura_head();

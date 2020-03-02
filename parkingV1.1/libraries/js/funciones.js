@@ -1,13 +1,3 @@
-
-
-function writeTimeReal(data){
-	if(data.value.length == 0){
-		document.getElementById("writeTime").innerHTML = "******";
-	}else{
-		document.getElementById("writeTime").innerHTML = data.value.toUpperCase();
-	}
-}
-
 function payParking(data){
 
 	var dia = document.getElementById("dia"+data).value;
@@ -32,98 +22,7 @@ function payParking(data){
 	daysMitad = horas/12;
 	daysCompleto = horas/24;
 
-
-	if((horas >= 0 && horas < 9)  && 
-		(valorHtml[1].toUpperCase().indexOf("HORAS") != -1 || valorHtml[1].toUpperCase().indexOf("HORA") != -1)){
-		amount = new Intl.NumberFormat("de-DE").format(valorHtml[0] * Math.ceil(horas));
-		message = "Tiempo transcurrido: "+Math.ceil(horas)+" "+valorHtml[1]+", Valor parqueo: "+ amount;
-
-		Swal.fire(
-			'Valor a Pagar!',
-			message
-		).then((response) => {
-			if(response.value){
-				$.ajax({
-					 data:  {idRegistro:idRegistro, secuenciaSalida: 1, fechaSalida: fechafin, concepto:valorHtml[2], pago: 1, amount:amount.replace(".",""), condition: 0 }, 
-					 url:   'controllers/pagosVehiculos.php', 
-					 type:  'post', 
-					 success:  function (response) { 
-					 	window.location.href = "InformesInusual";
-					 }
-				 });
-			}
-		})
-
-	}else if(horas > 8 && horas < 18){
-
-		if( (valorHtml[1].toUpperCase().indexOf("HORAS") != -1 || valorHtml[1].toUpperCase().indexOf("HORA") != -1) ||
-			(valorHtml[1].toUpperCase().indexOf("JORNADA") != -1 || valorHtml[1].toUpperCase().indexOf("COMPLETA") != -1) ){
-
-			Swal.fire({
-				 title: "Alerta, Se recomienda realizar el pago por días o por noches",
-				 text: "Cancele la operación o dale continuar para realizar el pago por "+valorHtml[1],
-				 icon: 'warning',
-				 showCancelButton: true,
-				 cancelButtonText: 'Cancelar',
-				 confirmButtonColor: '#3085d6',
-				 cancelButtonColor: '#d33',	
-				 confirmButtonText: 'Continuar'
-				}).then((result) => {
-					if (result.value) {
-						amount =  new Intl.NumberFormat("de-DE").format(valorHtml[0] * Math.ceil(horas));
-						message = "Tiempo transcurrido: "+Math.ceil(horas)+" "+valorHtml[1]+", Valor parqueo: "+ amount;
-						
-						Swal.fire(
-							'Valor a Pagar!',
-							message
-						).then((response) => {
-							if(response.value){
-
-								$.ajax({
-									 data:  {idRegistro:idRegistro, secuenciaSalida: 1, fechaSalida: fechafin, concepto:valorHtml[2], pago: 1, amount:amount.replace(".",""), condition: 0 }, 
-									 url:   'controllers/pagosVehiculos.php', 
-									 type:  'post', 
-									 success:  function (response) { 
-									 	window.location.href = "InformesInusual";
-									 }
-								 });
-							}
-						}) 
-					}
-				})
-
-		}else if((valorHtml[1].toUpperCase().indexOf("DIA") != -1 || valorHtml[1].toUpperCase().indexOf("DÍA") != -1) ||
-				 (valorHtml[1].toUpperCase().indexOf("DIAS") != -1 || valorHtml[1].toUpperCase().indexOf("DÍAS") != -1) ||
-				 (valorHtml[1].toUpperCase().indexOf("NOCHE") != -1 || valorHtml[1].toUpperCase().indexOf("NOCHES") != -1) ){
-			amount = new Intl.NumberFormat("de-DE").format(valorHtml[0] * Math.ceil(daysMitad));
-			message = "Tiempo transcurrido: "+Math.ceil(daysMitad)+" "+valorHtml[1]+", Valor parqueo: "+ amount;
-
-			Swal.fire(
-				'Valor a Pagar!',
-				message
-			).then((response) => {
-				if(response.value){
-					$.ajax({
-						 data:  {idRegistro:idRegistro, secuenciaSalida: 1, fechaSalida: fechafin, concepto:valorHtml[2], pago: 1, amount:amount.replace(".",""), condition: 0 }, 
-						 url:   'controllers/pagosVehiculos.php', 
-						 type:  'post', 
-						 success:  function (response) { 
-						 	window.location.href = "InformesInusual";
-						 }
-					 });
-				}
-			})
-		}
-	}else if( horas >= 18 ){
-
-
-
-	}else if( (valorHtml[1].toUpperCase().indexOf("HORAS") == -1 || valorHtml[1].toUpperCase().indexOf("HORA") == -1) ||
-		(valorHtml[1].toUpperCase().indexOf("JORNADA") == -1 || valorHtml[1].toUpperCase().indexOf("COMPLETA") == -1) ||
-		(valorHtml[1].toUpperCase().indexOf("DIA") == -1 || valorHtml[1].toUpperCase().indexOf("DÍA") == -1) ||
-		(valorHtml[1].toUpperCase().indexOf("DIAS") == -1 || valorHtml[1].toUpperCase().indexOf("DÍAS") == -1) ||
-		(valorHtml[1].toUpperCase().indexOf("NOCHE") == -1 || valorHtml[1].toUpperCase().indexOf("NOCHES") == -1) ){
-
+	if( valorHtml[0] == 0 ){
 		Swal.fire({
 		 title: "Advertencia",
 		 text: "El concepto seleccionado no genera cobro, si desea continuar con el concepto["+valorHtml[1]+"], presiona el boton continuar, de lo contrario presiona cancelar",
@@ -145,63 +44,154 @@ function payParking(data){
 				 });
 			}
 		})
-
-
+		return;
 	}
-	
 
-	// }else if(horas >= 18){
-	// 	titleAlert = "Alerta, Se recomienda realizar el pago por jornada completa";
-	// 	amount = new Intl.NumberFormat("de-DE").format(valorrHtml[0] * Math.ceil(daysCompleto));
-	// 	message = "Tiempo transcurrido: "+Math.ceil(daysCompleto)+" "+valorHtml[1]+", Valor parqueo: "+ amount;
-	// 	condition = true;
-	// }else{
-	// 	titleAlert = "";
-	// 	amount = new Intl.NumberFormat("de-DE").format(valorHtml[0] * Math.ceil(horas));
-	// 	message = "Tiempo transcurrido: "+Math.ceil(horas)+" "+valorHtml[1]+", Valor parqueo: "+ amount;
-	// 	condition = false;
-	// }
-	
+	if(horas >= 0 && horas < 9) {
 
+		if((valorHtml[1].toUpperCase().indexOf("HORAS") != -1 || valorHtml[1].toUpperCase().indexOf("HORA") != -1)){
 
+			amount = new Intl.NumberFormat("de-DE").format(valorHtml[0] * Math.ceil(horas));
+			message = "Tiempo transcurrido: "+Math.ceil(horas)+" "+valorHtml[1]+", Valor parqueo: "+ amount;
 
-	// if(condition){
-	// 	Swal.fire({
-	// 	 title: titleAlert,
-	// 	 text: "Cancele la operación o dale continuar para realizar el pago por "+valorHtml[1],
-	// 	 icon: 'warning',
-	// 	 showCancelButton: true,
-	// 	 cancelButtonText: 'Cancelar',
-	// 	 confirmButtonColor: '#3085d6',
-	// 	 cancelButtonColor: '#d33',	
-	// 	 confirmButtonText: 'Continuar'
-	// 	}).then((result) => {
-	// 		if (result.value) {
-	// 			amount =  new Intl.NumberFormat("de-DE").format(valorHtml[0] * Math.ceil(horas));
-	// 			message = "Tiempo transcurrido: "+Math.ceil(horas)+" "+valorHtml[1]+", Valor parqueo: "+ amount;
-				
-	// 			Swal.fire(
-	// 				'Valor a Pagar!',
-	// 				message
-	// 			).then((response) => {
-	// 				if(response.value){
+			Swal.fire(
+				'Valor a Pagar!',
+				message
+			).then((response) => {
+				if(response.value){
+					$.ajax({
+						 data:  {idRegistro:idRegistro, secuenciaSalida: 1, fechaSalida: fechafin, concepto:valorHtml[2], pago: 1, amount:amount.replace(".",""), condition: 0 }, 
+						 url:   'controllers/pagosVehiculos.php', 
+						 type:  'post', 
+						 success:  function (response) { 
+						 	window.location.href = "InformesInusual";
+						 }
+					 });
+				}
+			})
+		}else{
+			Swal.fire('El concepto no aplica, las horas en curso es menor al concepto');
+			return;
+		}
 
-	// 					$.ajax({
-	// 						 data:  {idRegistro:idRegistro, secuenciaSalida: 1, fechaSalida: fechafin, concepto:valorHtml[2], pago: 1, amount:amount.replace(".",""), condition: 0 }, 
-	// 						 url:   'controllers/pagosVehiculos.php', 
-	// 						 type:  'post', 
-	// 						 success:  function (response) { 
-	// 						 	window.location.href = "InformesInusual";
-	// 						    console.log(response);
-	// 						 }
-	// 					 });
-	// 				}
-	// 			}) 
-	// 		}
-	// 	})
-	//  }else{
-		
-	//  }
+	}else if(horas > 8 && horas < 18){
+		if(
+			valorHtml[1].toUpperCase().indexOf("DIA") != -1 || valorHtml[1].toUpperCase().indexOf("DIAS") != -1 ||
+			valorHtml[1].toUpperCase().indexOf("DÍA") != -1 || valorHtml[1].toUpperCase().indexOf("DÍAS") != -1 ||
+			valorHtml[1].toUpperCase().indexOf("NOCHE") != -1 || valorHtml[1].toUpperCase().indexOf("NOCHES") != -1
+			){
+			amount = new Intl.NumberFormat("de-DE").format(valorHtml[0] * Math.ceil(daysMitad));
+			message = "Tiempo transcurrido: "+Math.ceil(daysMitad)+" "+valorHtml[1]+", Valor parqueo: "+ amount;
+
+			Swal.fire(
+				'Valor a Pagar!',
+				message
+			).then((response) => {
+				if(response.value){
+					$.ajax({
+						 data:  {idRegistro:idRegistro, secuenciaSalida: 1, fechaSalida: fechafin, concepto:valorHtml[2], pago: 1, amount:amount.replace(".",""), condition: 0 }, 
+						 url:   'controllers/pagosVehiculos.php', 
+						 type:  'post', 
+						 success:  function (response) { 
+						 	window.location.href = "InformesInusual";
+						 }
+					 });
+				}
+			})
+		}else if(valorHtml[1].toUpperCase().indexOf("JORNADA") != -1 || valorHtml[1].toUpperCase().indexOf("COMPLETA") != -1){
+			Swal.fire('El concepto no aplica, las horas en curso es menor al concepto');
+			return;
+		}else{
+			Swal.fire({
+			 title: "Alerta, Se recomienda realizar el pago por días o por noches",
+			 text: "Cancele la operación o dale continuar para realizar el pago por "+valorHtml[1],
+			 icon: 'warning',
+			 showCancelButton: true,
+			 cancelButtonText: 'Cancelar',
+			 confirmButtonColor: '#3085d6',
+			 cancelButtonColor: '#d33',	
+			 confirmButtonText: 'Continuar'
+			}).then((result) => {
+				if (result.value) {
+
+					amount =  new Intl.NumberFormat("de-DE").format(valorHtml[0] * Math.ceil(horas));
+					message = "Tiempo transcurrido: "+Math.ceil(horas)+" "+valorHtml[1]+", Valor parqueo: "+ amount;
+					
+					Swal.fire(
+						'Valor a Pagar!',
+						message
+					).then((response) => {
+						if(response.value){
+
+							$.ajax({
+								 data:  {idRegistro:idRegistro, secuenciaSalida: 1, fechaSalida: fechafin, concepto:valorHtml[2], pago: 1, amount:amount.replace(".",""), condition: 0 }, 
+								 url:   'controllers/pagosVehiculos.php', 
+								 type:  'post', 
+								 success:  function (response) { 
+								 	window.location.href = "InformesInusual";
+								 }
+							 });
+						}
+					}) 
+
+				}
+			})
+		}
+	}else if( horas >= 18 ){
+		if(valorHtml[1].toUpperCase().indexOf("JORNADA") != -1 || valorHtml[1].toUpperCase().indexOf("COMPLETA") != -1){
+			amount = new Intl.NumberFormat("de-DE").format(valorHtml[0] * Math.ceil(daysMitad));
+			message = "Tiempo transcurrido: "+Math.ceil(daysMitad)+" "+valorHtml[1]+", Valor parqueo: "+ amount;
+
+			Swal.fire(
+				'Valor a Pagar!',
+				message
+			).then((response) => {
+				if(response.value){
+					$.ajax({
+						 data:  {idRegistro:idRegistro, secuenciaSalida: 1, fechaSalida: fechafin, concepto:valorHtml[2], pago: 1, amount:amount.replace(".",""), condition: 0 }, 
+						 url:   'controllers/pagosVehiculos.php', 
+						 type:  'post', 
+						 success:  function (response) { 
+						 	window.location.href = "InformesInusual";
+						 }
+					 });
+				}
+			})
+		}else{
+			Swal.fire({
+			 title: "Alerta, Se recomienda realizar el pago con el concepto Jornada Completa",
+			 text: "Cancele la operación o dale continuar para realizar el pago por "+valorHtml[1],
+			 icon: 'warning',
+			 showCancelButton: true,
+			 cancelButtonText: 'Cancelar',
+			 confirmButtonColor: '#3085d6',
+			 cancelButtonColor: '#d33',	
+			 confirmButtonText: 'Continuar'
+			}).then((result) => {
+				if (result.value) {
+					amount =  new Intl.NumberFormat("de-DE").format(valorHtml[0] * Math.ceil(horas));
+					message = "Tiempo transcurrido: "+Math.ceil(horas)+" "+valorHtml[1]+", Valor parqueo: "+ amount;
+					
+					Swal.fire(
+						'Valor a Pagar!',
+						message
+					).then((response) => {
+						if(response.value){
+
+							$.ajax({
+								 data:  {idRegistro:idRegistro, secuenciaSalida: 1, fechaSalida: fechafin, concepto:valorHtml[2], pago: 1, amount:amount.replace(".",""), condition: 0 }, 
+								 url:   'controllers/pagosVehiculos.php', 
+								 type:  'post', 
+								 success:  function (response) { 
+								 	window.location.href = "InformesInusual";
+								 }
+							 });
+						}
+					}) 
+				}
+			})
+		}
+	}
 }
 
 
@@ -261,6 +251,14 @@ function mensaje(dato){
 		//setTimeout(function(){quitarMensaje()},1000);
 	}
 	
+}
+
+function writeTimeReal(data){
+	if(data.value.length == 0){
+		document.getElementById("writeTime").innerHTML = "******";
+	}else{
+		document.getElementById("writeTime").innerHTML = data.value.toUpperCase();
+	}
 }
 
 setInterval(actualizarHora,1000);

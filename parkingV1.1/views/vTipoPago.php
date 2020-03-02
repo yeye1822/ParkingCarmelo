@@ -1,0 +1,1 @@
+<h1>Estes es el tipo de pago</h1>

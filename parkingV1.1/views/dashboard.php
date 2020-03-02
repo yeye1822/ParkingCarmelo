@@ -70,6 +70,7 @@ class dashboard{
 			        <a class="nav-item nav-link " href="Pago">Pagos</a>
 			        <a class="nav-item nav-link " href="Informes">Informes</a>
 			        <a class="nav-item nav-link" href="Configuracion">Configuración</a>
+			        <a class="nav-item nav-link" href="Config">Config</a>
 			        <a class="nav-item nav-link" href="controllers/cerrar.php">Salir</a>
 			      </div>
 			      <div class="d-flex flex-row justify-content-center">
@@ -217,6 +218,7 @@ class dashboard{
 	}
 
 	public function estructura_pie2(){
+	
 		?>
 	  
 			    <!-- jQuery first, then Tether, then Bootstrap JS. -->
@@ -224,6 +226,10 @@ class dashboard{
 			    <script src="libraries/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 			    <script src="libraries/js/bootstraps.min.js"></script>
 
+			<?php  
+			if(!isset($_SESSION['nombreUsuario'])){
+
+			?>
 			    <div class="inParking position">
 			    	<a href="Inicio">
 			    		<img src="libraries/image/carParking.png" class="imgFloat">
@@ -234,10 +240,14 @@ class dashboard{
 			    		<img src="libraries/image/payment.png" class="imgFloat">
 			    	</a>
 			    </div>
+			<?php  
+			}
+			?>
 
 			  </body>
 			</html>
 		<?php
+
 	}
 }
 
