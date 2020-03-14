@@ -13,6 +13,12 @@ class InformesControllers{
        return $obj->carInusualInfo($fecha);
 	}
 
+	public function paymentInusualInfo($fecha){
+
+	   $obj = new InformCar();
+       return $obj->paymentInusualInfo($fecha);
+	}
+
 	public function seeReportMonthly($fecha){
 		$obj = new InformCar();
 		return $obj->carMensual($fecha);

@@ -1,6 +1,6 @@
 <div class="row">
-	<div class="col-lg-1"></div>
-	  <div class="col-lg-10">
+	<div class="col-lg-1 col-xs-1"></div>
+	  <div class="col-lg-10 col-xs-12">
 		<ul class="nav nav-tabs" id="myTab" role="tablist">
 		  <li class="nav-item">
 		    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#usuario" role="tab" aria-controls="home" aria-selected="true">Usuario</a>

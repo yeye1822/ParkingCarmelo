@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.1
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 17-11-2019 a las 20:18:04
--- Versión del servidor: 10.1.33-MariaDB
--- Versión de PHP: 7.2.6
+-- Host: 127.0.0.1
+-- Generation Time: Mar 14, 2020 at 06:21 AM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `parqueadero`
+-- Database: `parkingcarmelo`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `colorcarro`
+-- Table structure for table `colorcarro`
 --
 
 CREATE TABLE `colorcarro` (
@@ -35,7 +35,7 @@ CREATE TABLE `colorcarro` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `colorcarro`
+-- Dumping data for table `colorcarro`
 --
 
 INSERT INTO `colorcarro` (`idColor`, `descripcionColor`, `fechaColor`) VALUES
@@ -49,29 +49,32 @@ INSERT INTO `colorcarro` (`idColor`, `descripcionColor`, `fechaColor`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `conceptoparq`
+-- Table structure for table `conceptoparq`
 --
 
 CREATE TABLE `conceptoparq` (
   `idParq` int(11) NOT NULL,
-  `descripcionParq` varchar(25) NOT NULL
+  `descripcionParq` varchar(25) NOT NULL,
+  `ValorConcepto` int(11) NOT NULL,
+  `statusConcept` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `conceptoparq`
+-- Dumping data for table `conceptoparq`
 --
 
-INSERT INTO `conceptoparq` (`idParq`, `descripcionParq`) VALUES
-(1, 'Inusual'),
-(8, 'pintor'),
-(9, 'serviteca'),
-(10, 'chatarreria'),
-(11, 'parqueo');
+INSERT INTO `conceptoparq` (`idParq`, `descripcionParq`, `ValorConcepto`, `statusConcept`) VALUES
+(1, 'Inusual', 0, 0),
+(8, 'pintor', 0, 1),
+(9, 'serviteca', 0, 1),
+(10, 'chatarreria', 0, 1),
+(11, 'parqueo', 0, 1),
+(12, 'Hora Particular', 2000, 1);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `marcacarro`
+-- Table structure for table `marcacarro`
 --
 
 CREATE TABLE `marcacarro` (
@@ -81,7 +84,7 @@ CREATE TABLE `marcacarro` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `marcacarro`
+-- Dumping data for table `marcacarro`
 --
 
 INSERT INTO `marcacarro` (`idMarca`, `descripcionMarca`, `fechaEmblema`) VALUES
@@ -169,7 +172,7 @@ INSERT INTO `marcacarro` (`idMarca`, `descripcionMarca`, `fechaEmblema`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `pagoscarro`
+-- Table structure for table `pagoscarro`
 --
 
 CREATE TABLE `pagoscarro` (
@@ -180,7 +183,7 @@ CREATE TABLE `pagoscarro` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `pagoscarro`
+-- Dumping data for table `pagoscarro`
 --
 
 INSERT INTO `pagoscarro` (`intPago`, `placaPagoFK`, `fechaPago`, `fechaReal`) VALUES
@@ -261,7 +264,7 @@ INSERT INTO `pagoscarro` (`intPago`, `placaPagoFK`, `fechaPago`, `fechaReal`) VA
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `parqcarros`
+-- Table structure for table `parqcarros`
 --
 
 CREATE TABLE `parqcarros` (
@@ -280,12 +283,12 @@ CREATE TABLE `parqcarros` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `parqcarros`
+-- Dumping data for table `parqcarros`
 --
 
 INSERT INTO `parqcarros` (`idCarro`, `idUsuarioFK`, `placaCarro`, `fechaCarro`, `valorCarro`, `fechapagoCarro`, `tipopagoCarroPK`, `marcaCarroPK`, `colorCarroPK`, `tipoCarroPK`, `estadoCarroPK`, `lineaCarro`) VALUES
 (2, 7, '000000', '2019-06-09 15:56:57', 21, 1, 7, 50, 1, 12, 1, 0),
-(5, 9, 'wlz340', '2019-06-09 15:33:06', 21, 1, 7, 50, 1, 11, 2, 0),
+(5, 9, 'wlz340', '2019-06-09 15:33:06', 21, 1, 7, 50, 1, 11, 0, 0),
 (6, 9, 'wco548', '2019-06-09 15:33:47', 21, 1, 7, 50, 1, 11, 1, 0),
 (7, 9, 'wcq218', '2019-06-09 15:36:09', 21, 1, 7, 50, 1, 11, 1, 0),
 (9, 9, 'Szt166', '2019-06-09 17:13:30', 21, 1, 7, 50, 1, 11, 1, 0),
@@ -362,12 +365,13 @@ INSERT INTO `parqcarros` (`idCarro`, `idUsuarioFK`, `placaCarro`, `fechaCarro`, 
 (80, 9, 'tdz641', '2019-11-16 16:34:22', 23, 1, 7, 50, 1, 11, 1, 0),
 (81, 62, 'tptm08', '2019-11-16 18:02:11', 29, 1, 7, 50, 1, 18, 1, 0),
 (82, 9, 'wlz 43', '2019-11-16 19:15:05', 23, 1, 7, 50, 1, 11, 1, 0),
-(83, 43, 'smw586', '2019-11-16 19:15:56', 23, 9, 7, 50, 1, 11, 1, 0);
+(83, 43, 'smw586', '2019-11-16 19:15:56', 23, 9, 7, 50, 1, 11, 1, 0),
+(84, 1, 'FCX353', '2020-03-13 23:58:03', 25, 5, 7, 50, 1, 16, 1, 0);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `parqestado`
+-- Table structure for table `parqestado`
 --
 
 CREATE TABLE `parqestado` (
@@ -376,17 +380,17 @@ CREATE TABLE `parqestado` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `parqestado`
+-- Dumping data for table `parqestado`
 --
 
 INSERT INTO `parqestado` (`idEstado`, `descripcionEstado`) VALUES
-(1, 'Activo'),
-(2, 'Inactivo');
+(0, 'Inactivo'),
+(1, 'Activo');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `parqpassword`
+-- Table structure for table `parqpassword`
 --
 
 CREATE TABLE `parqpassword` (
@@ -396,19 +400,19 @@ CREATE TABLE `parqpassword` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `parqpassword`
+-- Dumping data for table `parqpassword`
 --
 
 INSERT INTO `parqpassword` (`idPassword`, `idUsuarioFK`, `PasswordP`) VALUES
 (2, 6, '693cfed9dd8adf7c63afbf53cf3a8043'),
 (3, 7, '56018323b921dd2c5444f98fb45509de'),
 (4, 8, 'fe8fd04b0f86ecd2887a233afd7f54db'),
-(5, 1, '693cfed9dd8adf7c63afbf53cf3a8043');
+(5, 1, '6116afedcb0bc31083935c1c262ff4c9');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `parqusuarios`
+-- Table structure for table `parqusuarios`
 --
 
 CREATE TABLE `parqusuarios` (
@@ -423,7 +427,7 @@ CREATE TABLE `parqusuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `parqusuarios`
+-- Dumping data for table `parqusuarios`
 --
 
 INSERT INTO `parqusuarios` (`idUsuario`, `cedulaUsuario`, `nombreUsuario`, `apllidoUsuario`, `correoUsuario`, `fechaUsuario`, `estadoUsuarioPK`, `contactoUsuario`) VALUES
@@ -489,7 +493,7 @@ INSERT INTO `parqusuarios` (`idUsuario`, `cedulaUsuario`, `nombreUsuario`, `apll
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `referenciacarro`
+-- Table structure for table `referenciacarro`
 --
 
 CREATE TABLE `referenciacarro` (
@@ -499,7 +503,7 @@ CREATE TABLE `referenciacarro` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `referenciacarro`
+-- Dumping data for table `referenciacarro`
 --
 
 INSERT INTO `referenciacarro` (`idReferencia`, `descripcionReferencia`, `fkReferencia`) VALUES
@@ -1520,380 +1524,35 @@ INSERT INTO `referenciacarro` (`idReferencia`, `descripcionReferencia`, `fkRefer
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `registrocarro`
+-- Table structure for table `registrocarro`
 --
 
 CREATE TABLE `registrocarro` (
   `idRegistro` int(11) NOT NULL,
-  `fechaRegistro` datetime NOT NULL,
   `idCarroPK` int(11) NOT NULL,
-  `idSecuencia` int(11) NOT NULL,
+  `idSecuenciaEntrada` int(11) NOT NULL,
+  `fechaEntrada` datetime NOT NULL,
+  `idSecuenciaSalida` int(11) NOT NULL,
+  `fechaSalida` datetime NOT NULL,
   `Inusual` varchar(25) NOT NULL,
   `placaInusual` varchar(6) NOT NULL,
-  `idConceptoFK` int(11) NOT NULL
+  `idConceptoFK` int(11) NOT NULL,
+  `PagoCarro` int(11) NOT NULL,
+  `amount` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `registrocarro`
+-- Dumping data for table `registrocarro`
 --
 
-INSERT INTO `registrocarro` (`idRegistro`, `fechaRegistro`, `idCarroPK`, `idSecuencia`, `Inusual`, `placaInusual`, `idConceptoFK`) VALUES
-(44, '2019-06-09 16:51:43', 2, 2, 'Inusual', 'Fcx353', 1),
-(45, '2019-06-09 16:53:42', 5, 2, 'Normal', '', 1),
-(46, '2019-06-09 16:54:13', 5, 2, 'Normal', '', 1),
-(47, '2019-06-20 12:13:09', 2, 2, 'Inusual', 'tdz 83', 11),
-(48, '2019-06-20 12:14:18', 2, 2, 'Inusual', 'tdz 83', 1),
-(49, '2019-06-30 09:36:18', 2, 2, 'Inusual', 'tmu 21', 11),
-(50, '2019-06-30 09:41:14', 2, 2, 'Inusual', 'smv220', 1),
-(51, '2019-06-30 09:41:58', 2, 1, 'Inusual', 'vaf288', 1),
-(52, '2019-07-13 11:51:49', 2, 2, 'Inusual', 'tpy 14', 11),
-(53, '2019-07-13 11:53:07', 2, 1, 'Inusual', 'vaf288', 9),
-(54, '2019-09-16 17:33:53', 2, 2, 'Inusual', 'Kmx323', 1),
-(55, '2019-11-12 20:00:17', 13, 2, 'Normal', '', 1),
-(56, '2019-11-12 20:00:45', 2, 2, 'Inusual', 'tds785', 11),
-(57, '2019-11-12 20:05:49', 14, 2, 'Normal', '', 1),
-(58, '2019-11-12 20:06:00', 15, 2, 'Normal', '', 1),
-(59, '2019-11-12 20:06:07', 16, 2, 'Normal', '', 1),
-(60, '2019-11-12 20:06:16', 12, 2, 'Normal', '', 1),
-(61, '2019-11-12 20:06:25', 17, 2, 'Normal', '', 1),
-(62, '2019-11-12 20:06:39', 2, 2, 'Inusual', 'tpy692', 11),
-(63, '2019-11-12 20:08:25', 19, 2, 'Normal', '', 1),
-(64, '2019-11-12 20:08:49', 18, 2, 'Normal', '', 1),
-(65, '2019-11-12 20:09:02', 15, 2, 'Normal', '', 1),
-(66, '2019-11-12 20:09:31', 2, 2, 'Inusual', 'tsz755', 1),
-(67, '2019-11-12 20:20:29', 22, 2, 'Normal', '', 1),
-(68, '2019-11-12 20:22:43', 2, 2, 'Inusual', 'tjy043', 11),
-(69, '2019-11-12 20:44:27', 2, 2, 'Inusual', 'gfk626', 11),
-(70, '2019-11-12 20:46:11', 24, 2, 'Normal', '', 1),
-(71, '2019-11-12 20:46:22', 7, 2, 'Normal', '', 1),
-(72, '2019-11-12 20:47:24', 2, 1, 'Inusual', 'gfk626', 11),
-(73, '2019-11-12 20:49:01', 2, 1, 'Inusual', 'gfk626', 1),
-(74, '2019-11-12 21:01:23', 2, 2, 'Inusual', 'nbq711', 11),
-(75, '2019-11-12 21:28:32', 2, 2, 'Inusual', 'gdw821', 1),
-(76, '2019-11-12 21:28:58', 2, 2, 'Inusual', 'tds785', 11),
-(77, '2019-11-12 21:36:57', 2, 2, 'Inusual', 'syu747', 1),
-(78, '2019-11-12 21:40:16', 2, 2, 'Inusual', 'snt829', 1),
-(79, '2019-11-12 21:40:30', 2, 2, 'Inusual', 'sue851', 11),
-(80, '2019-11-12 21:44:09', 2, 2, 'Inusual', 'saw460', 8),
-(81, '2019-11-12 21:45:27', 2, 2, 'Inusual', 'ewh147', 8),
-(82, '2019-11-12 21:46:02', 2, 2, 'Inusual', 'sbo348', 8),
-(83, '2019-11-13 11:08:07', 25, 1, 'Normal', '', 1),
-(84, '2019-11-13 11:08:32', 15, 1, 'Normal', '', 1),
-(85, '2019-11-13 11:08:40', 14, 1, 'Normal', '', 1),
-(86, '2019-11-13 11:09:01', 16, 1, 'Normal', '', 1),
-(87, '2019-11-13 11:09:18', 17, 1, 'Normal', '', 1),
-(88, '2019-11-13 11:10:10', 23, 1, 'Normal', '', 1),
-(89, '2019-11-13 11:12:39', 22, 1, 'Normal', '', 1),
-(90, '2019-11-13 11:13:18', 2, 1, 'Inusual', 'nbq711', 11),
-(91, '2019-11-13 11:13:42', 2, 1, 'Inusual', 'tds785', 11),
-(92, '2019-11-13 11:14:08', 7, 1, 'Normal', '', 1),
-(93, '2019-11-13 11:15:39', 20, 1, 'Normal', '', 1),
-(94, '2019-11-13 11:16:57', 2, 2, 'Inusual', 'jhu440', 11),
-(95, '2019-11-13 11:18:07', 2, 2, 'Inusual', 'iap586', 11),
-(96, '2019-11-13 11:18:28', 2, 2, 'Inusual', 'mlw954', 11),
-(97, '2019-11-13 11:23:12', 2, 1, 'Inusual', 'nbq711', 11),
-(98, '2019-11-13 11:23:24', 2, 1, 'Inusual', 'mon262', 11),
-(99, '2019-11-13 11:23:48', 2, 1, 'Inusual', 'faq602', 11),
-(100, '2019-11-13 11:24:05', 2, 2, 'Inusual', 'tfq176', 11),
-(101, '2019-11-13 11:24:45', 2, 2, 'Inusual', 'ihi453', 11),
-(102, '2019-11-13 11:25:01', 2, 2, 'Inusual', 'tiu148', 11),
-(103, '2019-11-13 11:25:16', 2, 2, 'Inusual', 'lyh933', 11),
-(104, '2019-11-13 11:27:21', 2, 2, 'Inusual', 'bgv645', 11),
-(105, '2019-11-13 11:27:35', 2, 2, 'Inusual', 'saw460', 8),
-(106, '2019-11-13 11:30:49', 2, 2, 'Inusual', 'kde586', 11),
-(107, '2019-11-13 11:31:14', 2, 2, 'Inusual', 'qaj104', 11),
-(108, '2019-11-13 11:31:30', 2, 2, 'Inusual', 'fcw911', 11),
-(109, '2019-11-13 11:31:47', 2, 2, 'Inusual', 'eks648', 11),
-(110, '2019-11-13 11:32:05', 2, 2, 'Inusual', 'mnk397', 11),
-(111, '2019-11-13 11:32:26', 2, 2, 'Inusual', 'ist172', 11),
-(112, '2019-11-13 11:52:17', 28, 2, 'Normal', '', 1),
-(113, '2019-11-13 11:52:39', 29, 2, 'Normal', '', 1),
-(114, '2019-11-13 11:52:56', 30, 2, 'Normal', '', 1),
-(115, '2019-11-13 11:53:14', 2, 1, 'Inusual', 'jhu440', 11),
-(116, '2019-11-13 12:12:51', 2, 2, 'Inusual', 'rlj62c', 11),
-(117, '2019-11-13 12:14:16', 2, 2, 'Inusual', 'djv85', 11),
-(118, '2019-11-13 12:14:30', 2, 2, 'Inusual', 'kcx68c', 11),
-(119, '2019-11-13 12:14:40', 2, 2, 'Inusual', 'bwr44d', 11),
-(120, '2019-11-13 12:14:51', 2, 2, 'Inusual', 'tbw10c', 11),
-(121, '2019-11-13 12:15:02', 2, 2, 'Inusual', 'kir33d', 11),
-(122, '2019-11-13 12:15:20', 2, 2, 'Inusual', 'isv20b', 11),
-(123, '2019-11-13 12:15:35', 2, 2, 'Inusual', 'xtj57a', 11),
-(124, '2019-11-13 12:15:44', 2, 2, 'Inusual', 'rrg19c', 9),
-(125, '2019-11-13 12:22:50', 2, 2, 'Inusual', 'abx84b', 11),
-(126, '2019-11-13 13:37:55', 19, 1, 'Normal', '', 1),
-(127, '2019-11-13 13:39:05', 2, 1, 'Inusual', 'tpy692', 11),
-(128, '2019-11-13 13:40:01', 18, 1, 'Normal', '', 1),
-(129, '2019-11-13 13:40:15', 2, 1, 'Inusual', 'syu747', 11),
-(130, '2019-11-13 13:41:35', 2, 1, 'Inusual', 'tjy043', 11),
-(131, '2019-11-13 13:41:50', 2, 1, 'Inusual', 'snt829', 11),
-(132, '2019-11-13 13:42:06', 2, 2, 'Inusual', 'eot605', 11),
-(133, '2019-11-13 13:42:40', 2, 1, 'Inusual', 'eot605', 11),
-(134, '2019-11-13 13:43:01', 2, 1, 'Inusual', 'sue851', 11),
-(135, '2019-11-13 16:55:34', 20, 2, 'Normal', '', 1),
-(136, '2019-11-13 16:55:47', 44, 2, 'Normal', '', 1),
-(137, '2019-11-13 17:02:01', 2, 1, 'Inusual', 'tbw10c', 11),
-(138, '2019-11-13 17:02:14', 2, 1, 'Inusual', 'xtj57a', 11),
-(139, '2019-11-13 17:02:40', 23, 2, 'Normal', '', 1),
-(140, '2019-11-13 17:09:45', 2, 1, 'Inusual', 'bgv645', 11),
-(141, '2019-11-13 17:14:11', 32, 2, 'Normal', '', 1),
-(142, '2019-11-13 17:17:34', 7, 2, 'Normal', '', 1),
-(143, '2019-11-13 17:17:45', 2, 2, 'Inusual', 'hyv104', 9),
-(144, '2019-11-13 17:18:52', 39, 2, 'Normal', '', 1),
-(145, '2019-11-13 17:22:14', 47, 2, 'Normal', '', 1),
-(146, '2019-11-13 17:23:11', 2, 2, 'Inusual', 'jkf81e', 11),
-(147, '2019-11-13 17:24:30', 2, 1, 'Inusual', 'jkf81e', 11),
-(148, '2019-11-13 17:39:26', 36, 2, 'Normal', '', 1),
-(149, '2019-11-13 17:43:57', 48, 2, 'Normal', '', 1),
-(150, '2019-11-13 17:54:00', 41, 2, 'Normal', '', 1),
-(151, '2019-11-13 17:59:08', 2, 1, 'Inusual', 'djv85', 11),
-(152, '2019-11-13 17:59:25', 2, 1, 'Inusual', 'lyh933', 11),
-(153, '2019-11-13 18:00:22', 17, 2, 'Normal', '', 1),
-(154, '2019-11-13 18:01:29', 2, 1, 'Inusual', 'kde586', 11),
-(155, '2019-11-13 18:13:22', 2, 2, 'Inusual', 'ddd16a', 11),
-(156, '2019-11-13 18:23:31', 2, 2, 'Inusual', 'sns269', 11),
-(157, '2019-11-13 18:35:21', 52, 2, 'Normal', '', 1),
-(158, '2019-11-13 18:42:29', 53, 2, 'Normal', '', 1),
-(159, '2019-11-13 18:42:53', 2, 1, 'Inusual', 'bwr44d', 11),
-(160, '2019-11-13 18:47:13', 42, 2, 'Normal', '', 1),
-(161, '2019-11-13 18:54:24', 2, 2, 'Inusual', 'iap586', 11),
-(162, '2019-11-13 19:02:58', 55, 2, 'Normal', '', 1),
-(163, '2019-11-13 19:30:04', 56, 2, 'Normal', '', 1),
-(164, '2019-11-13 19:30:29', 57, 2, 'Normal', '', 1),
-(165, '2019-11-13 19:30:53', 56, 2, 'Normal', '', 1),
-(166, '2019-11-13 19:32:14', 2, 2, 'Inusual', 'snt829', 11),
-(167, '2019-11-13 19:32:25', 40, 2, 'Normal', '', 1),
-(168, '2019-11-13 19:34:03', 27, 2, 'Normal', '', 1),
-(169, '2019-11-13 19:39:34', 26, 2, 'Normal', '', 1),
-(170, '2019-11-13 19:40:50', 43, 2, 'Normal', '', 1),
-(171, '2019-11-13 19:43:53', 10, 1, 'Normal', '', 1),
-(172, '2019-11-13 19:53:01', 10, 2, 'Normal', '', 1),
-(173, '2019-11-13 19:59:14', 16, 2, 'Normal', '', 1),
-(174, '2019-11-13 20:19:40', 61, 2, 'Normal', '', 1),
-(175, '2019-11-13 20:19:50', 2, 1, 'Inusual', 'iap586', 11),
-(176, '2019-11-13 20:25:13', 62, 2, 'Normal', '', 1),
-(177, '2019-11-13 20:39:01', 65, 2, 'Normal', '', 1),
-(178, '2019-11-13 20:39:12', 64, 2, 'Normal', '', 1),
-(179, '2019-11-13 20:43:24', 2, 2, 'Inusual', 'ttm371', 11),
-(180, '2019-11-13 20:54:42', 66, 2, 'Normal', '', 1),
-(181, '2019-11-13 21:34:10', 24, 2, 'Normal', '', 1),
-(182, '2019-11-13 21:42:19', 22, 2, 'Normal', '', 1),
-(183, '2019-11-13 21:42:40', 2, 2, 'Inusual', 'tpy692', 1),
-(184, '2019-11-14 06:06:41', 2, 1, 'Inusual', 'sxq088', 11),
-(185, '2019-11-14 06:07:53', 2, 1, 'Inusual', 'tpy692', 11),
-(186, '2019-11-14 06:08:50', 33, 1, 'Normal', '', 1),
-(187, '2019-11-14 06:10:15', 33, 1, 'Normal', '', 1),
-(188, '2019-11-14 06:10:36', 23, 1, 'Normal', '', 1),
-(189, '2019-11-14 06:11:05', 63, 1, 'Normal', '', 1),
-(190, '2019-11-14 06:15:56', 69, 1, 'Normal', '', 1),
-(191, '2019-11-14 06:16:15', 51, 1, 'Normal', '', 1),
-(192, '2019-11-14 06:16:45', 20, 1, 'Normal', '', 1),
-(193, '2019-11-14 06:17:05', 56, 1, 'Normal', '', 1),
-(194, '2019-11-14 06:18:00', 16, 1, 'Normal', '', 1),
-(195, '2019-11-14 06:18:11', 2, 1, 'Inusual', 'ttm371', 11),
-(196, '2019-11-14 06:18:29', 50, 1, 'Normal', '', 1),
-(197, '2019-11-14 06:18:45', 2, 1, 'Inusual', 'wdy246', 11),
-(198, '2019-11-14 06:18:59', 10, 1, 'Normal', '', 1),
-(199, '2019-11-14 06:19:09', 11, 1, 'Normal', '', 1),
-(200, '2019-11-14 06:19:23', 18, 1, 'Normal', '', 1),
-(201, '2019-11-14 06:19:43', 7, 1, 'Normal', '', 1),
-(202, '2019-11-14 06:21:09', 2, 1, 'Inusual', 'svo344', 11),
-(203, '2019-11-14 06:21:24', 2, 1, 'Inusual', 'mmn31b', 11),
-(204, '2019-11-14 06:22:55', 43, 1, 'Normal', '', 1),
-(205, '2019-11-14 06:23:54', 32, 1, 'Normal', '', 1),
-(206, '2019-11-14 06:24:05', 65, 1, 'Normal', '', 1),
-(207, '2019-11-14 06:24:25', 2, 2, 'Inusual', 'jhu440', 11),
-(208, '2019-11-14 06:30:29', 2, 1, 'Inusual', 'sns269', 11),
-(209, '2019-11-14 06:35:17', 48, 1, 'Normal', '', 1),
-(210, '2019-11-14 06:35:30', 17, 1, 'Normal', '', 1),
-(211, '2019-11-14 06:46:32', 24, 1, 'Normal', '', 1),
-(212, '2019-11-14 06:47:22', 2, 1, 'Inusual', 'tiu148', 11),
-(213, '2019-11-14 06:52:19', 47, 1, 'Normal', '', 1),
-(214, '2019-11-14 06:52:35', 2, 2, 'Inusual', 'lyh933', 11),
-(215, '2019-11-14 07:04:17', 2, 2, 'Inusual', 'bwr44d', 11),
-(216, '2019-11-14 07:04:38', 2, 2, 'Inusual', 'qcp43d', 11),
-(217, '2019-11-14 07:05:14', 58, 1, 'Normal', '', 1),
-(218, '2019-11-14 07:06:39', 2, 1, 'Inusual', 'smw586', 11),
-(219, '2019-11-14 07:07:33', 49, 1, 'Normal', '', 1),
-(220, '2019-11-14 07:28:31', 2, 1, 'Inusual', 'snt829', 11),
-(221, '2019-11-14 07:30:13', 2, 1, 'Inusual', 'tiu148', 11),
-(222, '2019-11-14 07:30:28', 22, 1, 'Normal', '', 1),
-(223, '2019-11-14 07:31:12', 2, 2, 'Inusual', 'tdc785', 11),
-(224, '2019-11-14 07:35:05', 70, 1, 'Normal', '', 1),
-(225, '2019-11-14 07:35:17', 12, 1, 'Normal', '', 1),
-(226, '2019-11-14 07:35:40', 11, 1, 'Normal', '', 1),
-(227, '2019-11-14 07:36:05', 15, 1, 'Normal', '', 1),
-(228, '2019-11-14 07:36:54', 2, 2, 'Inusual', 'mlw954', 11),
-(229, '2019-11-14 07:37:56', 2, 2, 'Inusual', 'xez60e', 11),
-(230, '2019-11-14 07:38:30', 2, 2, 'Inusual', 'nph09a', 11),
-(231, '2019-11-14 07:39:24', 2, 1, 'Inusual', 'nph09a', 11),
-(232, '2019-11-14 07:39:40', 2, 2, 'Inusual', 'iap586', 11),
-(233, '2019-11-14 07:58:28', 2, 2, 'Inusual', 'uon75c', 11),
-(234, '2019-11-14 07:59:19', 2, 1, 'Inusual', 'uon75c', 11),
-(235, '2019-11-14 08:00:10', 2, 2, 'Inusual', 'upn75c', 9),
-(236, '2019-11-14 08:04:03', 2, 1, 'Inusual', 'ddd16a', 11),
-(237, '2019-11-14 13:08:15', 36, 1, 'Normal', '', 1),
-(238, '2019-11-14 13:10:29', 71, 1, 'Normal', '', 1),
-(239, '2019-11-14 13:10:39', 2, 1, 'Inusual', 'xez60e', 11),
-(240, '2019-11-14 15:40:51', 15, 2, 'Normal', '', 1),
-(241, '2019-11-14 16:08:19', 65, 2, 'Normal', '', 1),
-(242, '2019-11-14 16:12:19', 47, 2, 'Normal', '', 1),
-(243, '2019-11-14 16:22:19', 49, 2, 'Normal', '', 1),
-(244, '2019-11-14 16:34:12', 72, 2, 'Normal', '', 1),
-(245, '2019-11-14 16:34:29', 2, 2, 'Inusual', 'sxq088', 11),
-(246, '2019-11-14 16:36:44', 15, 1, 'Normal', '', 1),
-(247, '2019-11-14 16:46:29', 2, 2, 'Inusual', 'sns269', 11),
-(248, '2019-11-14 17:08:08', 44, 2, 'Normal', '', 1),
-(249, '2019-11-14 17:11:27', 2, 1, 'Inusual', 'lyh933', 11),
-(250, '2019-11-14 17:11:40', 2, 2, 'Inusual', 'mmn31b', 11),
-(251, '2019-11-14 17:14:19', 46, 2, 'Normal', '', 1),
-(252, '2019-11-14 17:17:22', 33, 2, 'Normal', '', 1),
-(253, '2019-11-14 17:19:09', 63, 2, 'Normal', '', 1),
-(254, '2019-11-14 17:25:43', 54, 2, 'Normal', '', 1),
-(255, '2019-11-14 17:26:56', 64, 2, 'Normal', '', 1),
-(256, '2019-11-14 17:37:39', 27, 2, 'Normal', '', 1),
-(257, '2019-11-14 17:38:59', 39, 2, 'Normal', '', 1),
-(258, '2019-11-14 17:41:00', 21, 2, 'Normal', '', 1),
-(259, '2019-11-14 17:48:05', 41, 2, 'Normal', '', 1),
-(260, '2019-11-14 17:49:23', 2, 2, 'Inusual', 'snn008', 11),
-(261, '2019-11-14 17:56:41', 41, 2, 'Normal', '', 1),
-(262, '2019-11-14 17:57:00', 20, 2, 'Normal', '', 1),
-(263, '2019-11-14 17:57:12', 2, 1, 'Inusual', 'djv85', 11),
-(264, '2019-11-14 18:01:01', 57, 2, 'Normal', '', 1),
-(265, '2019-11-14 18:15:12', 74, 2, 'Normal', '', 1),
-(266, '2019-11-14 18:15:21', 2, 2, 'Inusual', 'tiu148', 11),
-(267, '2019-11-14 18:15:31', 58, 2, 'Normal', '', 1),
-(268, '2019-11-14 18:16:33', 7, 2, 'Normal', '', 1),
-(269, '2019-11-14 18:29:48', 17, 2, 'Normal', '', 1),
-(270, '2019-11-14 18:40:47', 52, 2, 'Normal', '', 1),
-(271, '2019-11-14 18:42:51', 40, 2, 'Normal', '', 1),
-(272, '2019-11-14 18:44:08', 2, 1, 'Inusual', 'kcx68c', 10),
-(273, '2019-11-14 18:45:03', 2, 2, 'Inusual', 'tpy692', 11),
-(274, '2019-11-14 18:53:02', 30, 2, 'Normal', '', 1),
-(275, '2019-11-14 18:55:44', 23, 2, 'Normal', '', 1),
-(276, '2019-11-14 19:01:34', 14, 2, 'Normal', '', 1),
-(277, '2019-11-14 19:13:11', 75, 2, 'Normal', '', 1),
-(278, '2019-11-14 19:23:50', 76, 2, 'Normal', '', 1),
-(279, '2019-11-14 19:24:05', 2, 2, 'Inusual', 'tsz166', 11),
-(280, '2019-11-14 19:26:58', 2, 2, 'Inusual', 'tfq176', 11),
-(281, '2019-11-14 19:32:43', 9, 2, 'Normal', '', 1),
-(282, '2019-11-14 19:32:57', 24, 2, 'Normal', '', 1),
-(283, '2019-11-14 19:35:52', 56, 2, 'Normal', '', 1),
-(284, '2019-11-14 19:38:38', 2, 1, 'Inusual', 'tbw10c', 11),
-(285, '2019-11-14 19:39:50', 19, 2, 'Normal', '', 1),
-(286, '2019-11-14 19:39:59', 51, 2, 'Normal', '', 1),
-(287, '2019-11-14 19:40:50', 16, 2, 'Normal', '', 1),
-(288, '2019-11-14 19:44:29', 15, 2, 'Normal', '', 1),
-(289, '2019-11-14 20:00:27', 77, 2, 'Normal', '', 1),
-(290, '2019-11-14 20:00:42', 2, 2, 'Inusual', 'wcp448', 11),
-(291, '2019-11-14 20:11:55', 2, 2, 'Inusual', 'wdy246', 11),
-(292, '2019-11-14 20:12:16', 2, 2, 'Inusual', 'uqu88c', 11),
-(293, '2019-11-14 20:22:04', 10, 2, 'Normal', '', 1),
-(294, '2019-11-14 20:25:08', 36, 2, 'Normal', '', 1),
-(295, '2019-11-14 20:31:16', 26, 2, 'Normal', '', 1),
-(296, '2019-11-14 20:31:35', 2, 1, 'Inusual', 'gce38b', 11),
-(297, '2019-11-14 20:35:18', 45, 2, 'Normal', '', 1),
-(298, '2019-11-14 20:56:51', 62, 2, 'Normal', '', 1),
-(299, '2019-11-14 21:00:18', 2, 2, 'Inusual', 'rrv23c', 11),
-(300, '2019-11-14 21:05:20', 78, 2, 'Normal', '', 1),
-(301, '2019-11-14 21:07:27', 54, 2, 'Normal', '', 1),
-(302, '2019-11-15 10:26:36', 15, 1, 'Normal', '', 1),
-(303, '2019-11-15 10:26:49', 16, 1, 'Normal', '', 1),
-(304, '2019-11-15 10:27:00', 17, 1, 'Normal', '', 1),
-(305, '2019-11-15 10:27:07', 10, 1, 'Normal', '', 1),
-(306, '2019-11-15 10:27:29', 18, 1, 'Normal', '', 1),
-(307, '2019-11-15 10:27:40', 20, 1, 'Normal', '', 1),
-(308, '2019-11-15 10:27:49', 51, 1, 'Normal', '', 1),
-(309, '2019-11-15 10:29:08', 7, 1, 'Normal', '', 1),
-(310, '2019-11-15 10:30:17', 57, 1, 'Normal', '', 1),
-(311, '2019-11-15 10:31:02', 2, 1, 'Inusual', 'svo344', 11),
-(312, '2019-11-15 10:31:17', 44, 1, 'Normal', '', 1),
-(313, '2019-11-15 10:33:16', 41, 1, 'Normal', '', 1),
-(314, '2019-11-15 10:35:43', 79, 1, 'Normal', '', 1),
-(315, '2019-11-15 10:36:04', 42, 1, 'Normal', '', 1),
-(316, '2019-11-15 10:36:25', 47, 1, 'Normal', '', 1),
-(317, '2019-11-15 10:36:42', 46, 1, 'Normal', '', 1),
-(318, '2019-11-15 10:36:54', 75, 1, 'Normal', '', 1),
-(319, '2019-11-15 10:37:08', 30, 1, 'Normal', '', 1),
-(320, '2019-11-15 10:37:20', 78, 1, 'Normal', '', 1),
-(321, '2019-11-15 10:37:33', 33, 1, 'Normal', '', 1),
-(322, '2019-11-15 10:37:42', 33, 1, 'Normal', '', 1),
-(323, '2019-11-15 10:37:53', 14, 1, 'Normal', '', 1),
-(324, '2019-11-15 10:38:07', 54, 1, 'Normal', '', 1),
-(325, '2019-11-15 10:38:28', 38, 1, 'Normal', '', 1),
-(326, '2019-11-15 10:38:39', 19, 1, 'Normal', '', 1),
-(327, '2019-11-15 10:39:01', 63, 1, 'Normal', '', 1),
-(328, '2019-11-15 10:39:11', 69, 1, 'Normal', '', 1),
-(329, '2019-11-15 10:39:22', 62, 1, 'Normal', '', 1),
-(330, '2019-11-15 10:39:35', 21, 1, 'Normal', '', 1),
-(331, '2019-11-15 10:40:38', 23, 1, 'Normal', '', 1),
-(332, '2019-11-15 10:41:18', 72, 1, 'Normal', '', 1),
-(333, '2019-11-15 10:41:46', 2, 1, 'Inusual', 'ist172', 11),
-(334, '2019-11-15 10:42:04', 48, 1, 'Normal', '', 1),
-(335, '2019-11-15 10:47:35', 2, 2, 'Inusual', 'mlw954', 1),
-(336, '2019-11-15 10:49:17', 2, 2, 'Inusual', 'kde586', 1),
-(337, '2019-11-15 10:49:39', 2, 2, 'Inusual', 'snz343', 1),
-(338, '2019-11-15 10:50:01', 2, 2, 'Inusual', 'lhy933', 1),
-(339, '2019-11-15 10:50:24', 35, 2, 'Normal', '', 1),
-(340, '2019-11-15 10:50:37', 2, 2, 'Inusual', 'jbs936', 1),
-(341, '2019-11-15 10:50:55', 2, 2, 'Inusual', 'bgv645', 1),
-(342, '2019-11-15 10:52:52', 2, 2, 'Inusual', 'djv85', 1),
-(343, '2019-11-15 10:53:47', 2, 2, 'Inusual', 'kcx68c', 1),
-(344, '2019-11-15 10:54:06', 2, 2, 'Inusual', 'qcp43d', 1),
-(345, '2019-11-15 17:08:39', 44, 2, 'Normal', '', 1),
-(346, '2019-11-15 17:08:52', 49, 2, 'Normal', '', 1),
-(347, '2019-11-15 17:09:03', 54, 2, 'Normal', '', 1),
-(348, '2019-11-15 17:10:06', 47, 2, 'Normal', '', 1),
-(349, '2019-11-15 17:13:45', 46, 2, 'Normal', '', 1),
-(350, '2019-11-15 17:36:48', 57, 2, 'Normal', '', 1),
-(351, '2019-11-15 17:41:08', 23, 2, 'Normal', '', 1),
-(352, '2019-11-15 17:54:47', 2, 2, 'Inusual', 'tay 15', 1),
-(353, '2019-11-15 17:57:41', 17, 2, 'Normal', '', 1),
-(354, '2019-11-15 18:08:45', 7, 2, 'Normal', '', 1),
-(355, '2019-11-16 16:33:52', 69, 2, 'Normal', '', 1),
-(356, '2019-11-16 16:36:56', 80, 2, 'Normal', '', 1),
-(357, '2019-11-16 16:37:10', 7, 2, 'Normal', '', 1),
-(358, '2019-11-16 16:47:33', 49, 2, 'Normal', '', 1),
-(359, '2019-11-16 16:47:47', 75, 2, 'Normal', '', 1),
-(360, '2019-11-16 16:47:56', 46, 2, 'Normal', '', 1),
-(361, '2019-11-16 16:48:05', 43, 2, 'Normal', '', 1),
-(362, '2019-11-16 16:48:30', 70, 2, 'Normal', '', 1),
-(363, '2019-11-16 16:48:42', 59, 2, 'Normal', '', 1),
-(364, '2019-11-16 16:48:53', 16, 2, 'Normal', '', 1),
-(365, '2019-11-16 16:49:03', 64, 2, 'Normal', '', 1),
-(366, '2019-11-16 16:49:17', 72, 2, 'Normal', '', 1),
-(367, '2019-11-16 16:49:27', 63, 2, 'Normal', '', 1),
-(368, '2019-11-16 16:49:36', 28, 2, 'Normal', '', 1),
-(369, '2019-11-16 17:23:10', 51, 2, 'Normal', '', 1),
-(370, '2019-11-16 17:37:12', 26, 2, 'Normal', '', 1),
-(371, '2019-11-16 17:37:30', 2, 2, 'Inusual', 'sns269', 11),
-(372, '2019-11-16 17:52:00', 38, 2, 'Normal', '', 1),
-(373, '2019-11-16 17:56:34', 23, 2, 'Normal', '', 1),
-(374, '2019-11-16 17:57:54', 37, 2, 'Normal', '', 1),
-(375, '2019-11-16 18:03:25', 27, 2, 'Normal', '', 1),
-(376, '2019-11-16 18:03:35', 68, 2, 'Normal', '', 1),
-(377, '2019-11-16 18:03:45', 81, 2, 'Normal', '', 1),
-(378, '2019-11-16 18:04:04', 19, 2, 'Normal', '', 1),
-(379, '2019-11-16 18:07:54', 2, 2, 'Inusual', 'smw586', 11),
-(380, '2019-11-16 18:16:52', 56, 2, 'Normal', '', 1),
-(381, '2019-11-16 18:30:46', 14, 2, 'Normal', '', 1),
-(382, '2019-11-16 18:38:09', 11, 2, 'Normal', '', 1),
-(383, '2019-11-16 18:38:24', 17, 2, 'Normal', '', 1),
-(384, '2019-11-16 18:39:22', 41, 2, 'Normal', '', 1),
-(385, '2019-11-16 18:54:18', 40, 2, 'Normal', '', 1),
-(386, '2019-11-16 19:00:50', 33, 2, 'Normal', '', 1),
-(387, '2019-11-16 19:07:27', 78, 2, 'Normal', '', 1),
-(388, '2019-11-16 19:16:44', 82, 2, 'Normal', '', 1),
-(389, '2019-11-16 19:16:59', 83, 2, 'Normal', '', 1),
-(390, '2019-11-16 19:17:41', 83, 1, 'Normal', '', 1),
-(391, '2019-11-16 19:25:01', 2, 2, 'Inusual', 'tpy692', 11),
-(392, '2019-11-16 19:31:56', 15, 2, 'Normal', '', 1),
-(393, '2019-11-16 19:46:46', 2, 2, 'Inusual', 'ttm371', 1),
-(394, '2019-11-16 19:56:52', 21, 2, 'Normal', '', 1);
+INSERT INTO `registrocarro` (`idRegistro`, `idCarroPK`, `idSecuenciaEntrada`, `fechaEntrada`, `idSecuenciaSalida`, `fechaSalida`, `Inusual`, `placaInusual`, `idConceptoFK`, `PagoCarro`, `amount`) VALUES
+(399, 2, 2, '2020-03-14 00:18:45', 1, '2020-03-14 00:19:28', 'Inusual', 'FCX352', 12, 1, 2000),
+(400, 84, 2, '2020-03-14 00:18:58', 1, '2020-03-14 00:19:49', 'Normal', '', 1, 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `secuenciacarro`
+-- Table structure for table `secuenciacarro`
 --
 
 CREATE TABLE `secuenciacarro` (
@@ -1902,7 +1561,7 @@ CREATE TABLE `secuenciacarro` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `secuenciacarro`
+-- Dumping data for table `secuenciacarro`
 --
 
 INSERT INTO `secuenciacarro` (`intSecuencia`, `descripcionSecuencia`) VALUES
@@ -1913,7 +1572,7 @@ INSERT INTO `secuenciacarro` (`intSecuencia`, `descripcionSecuencia`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tarifacarro`
+-- Table structure for table `tarifacarro`
 --
 
 CREATE TABLE `tarifacarro` (
@@ -1923,7 +1582,7 @@ CREATE TABLE `tarifacarro` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `tarifacarro`
+-- Dumping data for table `tarifacarro`
 --
 
 INSERT INTO `tarifacarro` (`intTarifa`, `valorTarifa`, `estadoTarifa`) VALUES
@@ -1942,7 +1601,7 @@ INSERT INTO `tarifacarro` (`intTarifa`, `valorTarifa`, `estadoTarifa`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tipocarro`
+-- Table structure for table `tipocarro`
 --
 
 CREATE TABLE `tipocarro` (
@@ -1951,7 +1610,7 @@ CREATE TABLE `tipocarro` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `tipocarro`
+-- Dumping data for table `tipocarro`
 --
 
 INSERT INTO `tipocarro` (`idTipo`, `descripcionTipo`) VALUES
@@ -1968,7 +1627,7 @@ INSERT INTO `tipocarro` (`idTipo`, `descripcionTipo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tipopagocarro`
+-- Table structure for table `tipopagocarro`
 --
 
 CREATE TABLE `tipopagocarro` (
@@ -1977,43 +1636,47 @@ CREATE TABLE `tipopagocarro` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `tipopagocarro`
+-- Dumping data for table `tipopagocarro`
 --
 
 INSERT INTO `tipopagocarro` (`idTipopago`, `descripcionTipopago`) VALUES
-(7, 'mensual ');
+(7, 'mensual '),
+(8, 'Quinsenal\r\n'),
+(9, 'Semanal'),
+(10, 'Diario'),
+(11, 'Pago por horas');
 
 --
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `colorcarro`
+-- Indexes for table `colorcarro`
 --
 ALTER TABLE `colorcarro`
   ADD PRIMARY KEY (`idColor`);
 
 --
--- Indices de la tabla `conceptoparq`
+-- Indexes for table `conceptoparq`
 --
 ALTER TABLE `conceptoparq`
   ADD PRIMARY KEY (`idParq`);
 
 --
--- Indices de la tabla `marcacarro`
+-- Indexes for table `marcacarro`
 --
 ALTER TABLE `marcacarro`
   ADD PRIMARY KEY (`idMarca`);
 
 --
--- Indices de la tabla `pagoscarro`
+-- Indexes for table `pagoscarro`
 --
 ALTER TABLE `pagoscarro`
   ADD PRIMARY KEY (`intPago`),
   ADD KEY `placaPagoFK` (`placaPagoFK`);
 
 --
--- Indices de la tabla `parqcarros`
+-- Indexes for table `parqcarros`
 --
 ALTER TABLE `parqcarros`
   ADD PRIMARY KEY (`idCarro`),
@@ -2027,166 +1690,166 @@ ALTER TABLE `parqcarros`
   ADD KEY `idUsuarioFK_2` (`idUsuarioFK`);
 
 --
--- Indices de la tabla `parqestado`
+-- Indexes for table `parqestado`
 --
 ALTER TABLE `parqestado`
   ADD PRIMARY KEY (`idEstado`);
 
 --
--- Indices de la tabla `parqpassword`
+-- Indexes for table `parqpassword`
 --
 ALTER TABLE `parqpassword`
   ADD PRIMARY KEY (`idPassword`),
   ADD UNIQUE KEY `idUsuarioFK` (`idUsuarioFK`);
 
 --
--- Indices de la tabla `parqusuarios`
+-- Indexes for table `parqusuarios`
 --
 ALTER TABLE `parqusuarios`
   ADD PRIMARY KEY (`idUsuario`),
   ADD KEY `estadoUsuarioPK` (`estadoUsuarioPK`);
 
 --
--- Indices de la tabla `referenciacarro`
+-- Indexes for table `referenciacarro`
 --
 ALTER TABLE `referenciacarro`
   ADD PRIMARY KEY (`idReferencia`),
   ADD KEY `fkReferencia` (`fkReferencia`);
 
 --
--- Indices de la tabla `registrocarro`
+-- Indexes for table `registrocarro`
 --
 ALTER TABLE `registrocarro`
   ADD PRIMARY KEY (`idRegistro`),
   ADD KEY `idCarroPK` (`idCarroPK`),
-  ADD KEY `idSecuencia` (`idSecuencia`),
+  ADD KEY `idSecuencia` (`idSecuenciaEntrada`),
   ADD KEY `idConceptoFK` (`idConceptoFK`);
 
 --
--- Indices de la tabla `secuenciacarro`
+-- Indexes for table `secuenciacarro`
 --
 ALTER TABLE `secuenciacarro`
   ADD PRIMARY KEY (`intSecuencia`);
 
 --
--- Indices de la tabla `tarifacarro`
+-- Indexes for table `tarifacarro`
 --
 ALTER TABLE `tarifacarro`
   ADD PRIMARY KEY (`intTarifa`),
   ADD KEY `estadoTarifa` (`estadoTarifa`);
 
 --
--- Indices de la tabla `tipocarro`
+-- Indexes for table `tipocarro`
 --
 ALTER TABLE `tipocarro`
   ADD PRIMARY KEY (`idTipo`);
 
 --
--- Indices de la tabla `tipopagocarro`
+-- Indexes for table `tipopagocarro`
 --
 ALTER TABLE `tipopagocarro`
   ADD PRIMARY KEY (`idTipopago`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `colorcarro`
+-- AUTO_INCREMENT for table `colorcarro`
 --
 ALTER TABLE `colorcarro`
   MODIFY `idColor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 
 --
--- AUTO_INCREMENT de la tabla `conceptoparq`
+-- AUTO_INCREMENT for table `conceptoparq`
 --
 ALTER TABLE `conceptoparq`
-  MODIFY `idParq` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `idParq` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT de la tabla `marcacarro`
+-- AUTO_INCREMENT for table `marcacarro`
 --
 ALTER TABLE `marcacarro`
   MODIFY `idMarca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 
 --
--- AUTO_INCREMENT de la tabla `pagoscarro`
+-- AUTO_INCREMENT for table `pagoscarro`
 --
 ALTER TABLE `pagoscarro`
-  MODIFY `intPago` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `intPago` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 
 --
--- AUTO_INCREMENT de la tabla `parqcarros`
+-- AUTO_INCREMENT for table `parqcarros`
 --
 ALTER TABLE `parqcarros`
-  MODIFY `idCarro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+  MODIFY `idCarro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
--- AUTO_INCREMENT de la tabla `parqestado`
+-- AUTO_INCREMENT for table `parqestado`
 --
 ALTER TABLE `parqestado`
   MODIFY `idEstado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT de la tabla `parqpassword`
+-- AUTO_INCREMENT for table `parqpassword`
 --
 ALTER TABLE `parqpassword`
-  MODIFY `idPassword` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idPassword` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT de la tabla `parqusuarios`
+-- AUTO_INCREMENT for table `parqusuarios`
 --
 ALTER TABLE `parqusuarios`
   MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
--- AUTO_INCREMENT de la tabla `referenciacarro`
+-- AUTO_INCREMENT for table `referenciacarro`
 --
 ALTER TABLE `referenciacarro`
   MODIFY `idReferencia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5048;
 
 --
--- AUTO_INCREMENT de la tabla `registrocarro`
+-- AUTO_INCREMENT for table `registrocarro`
 --
 ALTER TABLE `registrocarro`
-  MODIFY `idRegistro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=395;
+  MODIFY `idRegistro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=401;
 
 --
--- AUTO_INCREMENT de la tabla `secuenciacarro`
+-- AUTO_INCREMENT for table `secuenciacarro`
 --
 ALTER TABLE `secuenciacarro`
   MODIFY `intSecuencia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT de la tabla `tarifacarro`
+-- AUTO_INCREMENT for table `tarifacarro`
 --
 ALTER TABLE `tarifacarro`
   MODIFY `intTarifa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
--- AUTO_INCREMENT de la tabla `tipocarro`
+-- AUTO_INCREMENT for table `tipocarro`
 --
 ALTER TABLE `tipocarro`
   MODIFY `idTipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
--- AUTO_INCREMENT de la tabla `tipopagocarro`
+-- AUTO_INCREMENT for table `tipopagocarro`
 --
 ALTER TABLE `tipopagocarro`
-  MODIFY `idTipopago` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idTipopago` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- Restricciones para tablas volcadas
+-- Constraints for dumped tables
 --
 
 --
--- Filtros para la tabla `pagoscarro`
+-- Constraints for table `pagoscarro`
 --
 ALTER TABLE `pagoscarro`
   ADD CONSTRAINT `pagoscarro_ibfk_1` FOREIGN KEY (`placaPagoFK`) REFERENCES `parqcarros` (`idCarro`);
 
 --
--- Filtros para la tabla `parqcarros`
+-- Constraints for table `parqcarros`
 --
 ALTER TABLE `parqcarros`
   ADD CONSTRAINT `parqcarros_ibfk_1` FOREIGN KEY (`idUsuarioFK`) REFERENCES `parqusuarios` (`idUsuario`),
@@ -2198,36 +1861,36 @@ ALTER TABLE `parqcarros`
   ADD CONSTRAINT `parqcarros_ibfk_7` FOREIGN KEY (`estadoCarroPK`) REFERENCES `parqestado` (`idEstado`) ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `parqpassword`
+-- Constraints for table `parqpassword`
 --
 ALTER TABLE `parqpassword`
   ADD CONSTRAINT `parqpassword_ibfk_1` FOREIGN KEY (`idUsuarioFK`) REFERENCES `parqusuarios` (`idUsuario`);
 
 --
--- Filtros para la tabla `parqusuarios`
+-- Constraints for table `parqusuarios`
 --
 ALTER TABLE `parqusuarios`
   ADD CONSTRAINT `parqusuarios_ibfk_1` FOREIGN KEY (`estadoUsuarioPK`) REFERENCES `parqestado` (`idEstado`) ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `referenciacarro`
+-- Constraints for table `referenciacarro`
 --
 ALTER TABLE `referenciacarro`
   ADD CONSTRAINT `referenciacarro_ibfk_1` FOREIGN KEY (`fkReferencia`) REFERENCES `marcacarro` (`idMarca`);
 
 --
--- Filtros para la tabla `registrocarro`
+-- Constraints for table `registrocarro`
 --
 ALTER TABLE `registrocarro`
   ADD CONSTRAINT `registrocarro_ibfk_1` FOREIGN KEY (`idCarroPK`) REFERENCES `parqcarros` (`idCarro`),
-  ADD CONSTRAINT `registrocarro_ibfk_2` FOREIGN KEY (`idSecuencia`) REFERENCES `secuenciacarro` (`intSecuencia`),
+  ADD CONSTRAINT `registrocarro_ibfk_2` FOREIGN KEY (`idSecuenciaEntrada`) REFERENCES `secuenciacarro` (`intSecuencia`),
   ADD CONSTRAINT `registrocarro_ibfk_3` FOREIGN KEY (`idConceptoFK`) REFERENCES `conceptoparq` (`idParq`);
 
 --
--- Filtros para la tabla `tarifacarro`
+-- Constraints for table `tarifacarro`
 --
 ALTER TABLE `tarifacarro`
-  ADD CONSTRAINT `tarifacarro_ibfk_1` FOREIGN KEY (`estadoTarifa`) REFERENCES `parqestado` (`idEstado`);
+  ADD CONSTRAINT `tarifacarro_ibfk_1` FOREIGN KEY (`estadoTarifa`) REFERENCES `parqestado` (`idEstado`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

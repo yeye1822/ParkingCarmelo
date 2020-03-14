@@ -4,7 +4,7 @@
 		private $servidor = "localhost";
 		private $usuario = "root";
 		private $password = "";
-		private $db = "parqueadero";
+		private $db = "parkingcarmelo";
 
 		public function conexion(){
 			$conexion = mysqli_connect( $this->servidor,

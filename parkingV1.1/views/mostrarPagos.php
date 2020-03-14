@@ -42,11 +42,12 @@ class pagos{
 				    	<tr>
 				    		<td class='text-uppercase'><?php echo $key[1]; ?></td>
 				    		<td class="text-center">
+
 				    			<?php 
 				    				if($mesCurso == 'Enero'){$añoActual = $añoActual-1;}else{$añoActual;}
 
 				    				$dato = array($key[0],$mesCursoAnt.'-'.$añoActual);
-				    				if($obj->consultarVeh($dato)[0] == ''){ ?>
+				    				if($obj->consultarVeh($dato) == ''){ ?>
 				    				<input type="checkbox" id="<?php echo $key[0]; ?>" value="MA" onchange="pagosIngresar(this);">
 				    			<?php }else{ ?>
 				    				<input type="checkbox" id="<?php echo $key[0]; ?>" value="MA" onchange="pagosIngresar(this);" checked>
@@ -58,7 +59,7 @@ class pagos{
 				    		<td class="text-center">
 				    			<?php 
 				    				$dato = array($key[0],$mesCurso.'-'.$añoActual);
-				    				if($obj->consultarVeh($dato)[0] == ''){ 
+				    				if($obj->consultarVeh($dato) == ''){ 
 				    			 ?>
 				    				<input type="checkbox" id="<?php echo $key[0]; ?>" value="MC" onchange="pagosIngresar(this);">
 				    			<?php }else{ ?>
@@ -73,7 +74,7 @@ class pagos{
 				    				if($mesCurso == 'Diciembre'){$añoActual = $añoActual-1;}else{$añoActual;}
 
 				    				$dato = array($key[0],$mesCursoDes.'-'.$añoActual);
-				    				if($obj->consultarVeh($dato)[0] == ''){
+				    				if($obj->consultarVeh($dato) == ''){
 				    			 ?>
 				    				<input type="checkbox" id="<?php echo $key[0]; ?>" value="MD" onchange="pagosIngresar(this);">
 				    			<?php }else{ ?>

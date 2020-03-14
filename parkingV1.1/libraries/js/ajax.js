@@ -1,3 +1,39 @@
+function updateConcept(id, valor){
+	valorN = document.getElementById("id"+id).innerHTML == "Inactivo" ? 1 : 0;
+	valorL = document.getElementById("id"+id).innerHTML == "Inactivo" ? "Activo" : "Inactivo";
+
+	$.ajax({
+		data: 	{ id:valor, status:valorN },
+		url: 	'ajax/aUpdateConcepto.php',
+		type: 	'post',
+		success: function(response){
+			if(response == 1){
+				document.getElementById("id"+id).innerHTML = valorL;
+				message('Operación Exitosa','El estado se actualizo correctamente','success');
+			}else{
+				message('Error en la operación','Error al actualizar el estado','danger');
+			}
+		}
+	});
+}
+
+function selectConceptData(valor){
+
+	$.ajax({
+		data: { idConcept: valor },
+		url:  'ajax/aUpdateConcepto.php',
+		type: 'post',
+		success: function(response){
+			data = response.split("|");
+			document.getElementById("txtId").value = data[0];
+			document.getElementById("txtDescripcion").value = data[1];
+			document.getElementById("txtValor").value = data[2];
+			document.getElementById("txtStatus").value = data[3];
+		}
+	});
+}
+
+
 
 function pagosIngresar(dato){
 	var datosFecha = document.getElementById(dato.value+dato.id).value;

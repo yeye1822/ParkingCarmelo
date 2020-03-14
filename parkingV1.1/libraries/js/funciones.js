@@ -1,3 +1,12 @@
+function message(titlee, textt, iconn){
+	Swal.fire({
+			 title: titlee,
+			 text: textt,
+			 icon: iconn
+			}).then((result) => {})
+}
+
+
 function payParking(data){
 
 	var dia = document.getElementById("dia"+data).value;

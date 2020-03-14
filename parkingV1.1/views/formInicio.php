@@ -14,9 +14,6 @@
 						      		if(@$mensaje != ''){
 						      			echo "<script>
 						      					mensaje('$mensaje');
-						      					setTimeout(function(){ 
-													window.location.href = 'index.php';
-						      					 }, 3000);
 						      				</script>"; 
 						      		} 
 						      	?>	
@@ -28,7 +25,7 @@
 						      <form method="post" action='controllers/registroDatos.php'>
 						          <div class="input-group">
 						              <span class="input-group-addon"><i class="fa fa-car"></i></span>
-						              <input type="text" class="form-control text-uppercase" name="placa" placeholder="Escribe tu placa" id='placa' maxlength="6" required autocomplete="off" onkeyup="writeTimeReal(this)">
+						              <input type="text" class="form-control text-uppercase" name="placa" placeholder="Escribe tu placa" id='placa' maxlength="6" required autocomplete="off" onkeyup="writeTimeReal(this)" minlength="6">
 						          </div> 
 
 								<div class="row mt-3"> 
@@ -38,7 +35,7 @@
 										      <label><input type="radio" name="tipoEntrada" value="2" required> Entrada</label>
 										    </div>
 										    <div class="radio col-sm-6 typeOut">
-										      <label><input type="radio" name="tipoEntrada" value="1" required > Salida</label>
+										      <label><input type="radio" name="tipoEntrada" value="1" required> Salida</label>
 										    </div>
 										</div>
 									</div>

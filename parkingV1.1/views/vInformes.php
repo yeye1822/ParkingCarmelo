@@ -45,6 +45,11 @@
                       $obj = new InformesControllers();
                       $data = $obj->carInusualInfo($fecha);
 
+                      $valor = $obj->paymentInusualInfo($fecha);
+
+
+                      echo "<p class='infoData'>Valor a liquidar: $ <strong>".number_format($valor[0])."</strong></p>";
+
                       foreach($data as $key){
 
                         if($key[7] == 1){
@@ -63,7 +68,7 @@
                            echo "<td>".date_format(date_create($key[2]), 'd/m/Y g:i A')."</td>";
                         }
                         echo "<td>".$key[8]."</td>";
-                        echo "<td>".$key[9]."</td>";
+                        echo "<td>".number_format($key[9])."</td>";
                      
                         
                         echo "</tr>";

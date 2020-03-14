@@ -5,6 +5,7 @@ require_once 'models/consInusuales.php';
 require_once 'models/pagoVehiculo.php';
 require_once 'models/mInformes.php';
 require_once 'models/mConsultConcept.php';
+require_once 'models/mConcepto.php';
 
 require_once 'controllers/cInformes.php';
 require_once 'controllers/cConsultConcept.php';
@@ -62,7 +63,7 @@ if (!isset($_SESSION['nombreUsuario'])){
 			$estructura->estructura_head();
 			$estructura->menu();
 			$estructura->graficasDashboard();
-			$estructura->estructura_pie();	
+			$estructura->estructura_pie2();	
 			break;
 		case 'Configuracion':
 			$formConfiguracion = new configuracion();

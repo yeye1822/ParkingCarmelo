@@ -69,8 +69,8 @@ class dashboard{
 			        <a class="nav-item nav-link " href="Dashboard">Dashboard</a>
 			        <a class="nav-item nav-link " href="Pago">Pagos</a>
 			        <a class="nav-item nav-link " href="Informes">Informes</a>
-			        <a class="nav-item nav-link" href="Configuracion">Configuración</a>
-			        <a class="nav-item nav-link" href="Config">Config</a>
+			        <a class="nav-item nav-link" href="Configuracion">Config</a>
+			        <a class="nav-item nav-link" href="Config">Configuración</a>
 			        <a class="nav-item nav-link" href="controllers/cerrar.php">Salir</a>
 			      </div>
 			      <div class="d-flex flex-row justify-content-center">
@@ -90,9 +90,7 @@ class dashboard{
 		      		if(@$mensaje != ''){
 		      			echo "<script>
 		      					mensaje('$mensaje');
-		      					setTimeout(function(){ 
-									window.location.href = 'index.php';
-		      					 }, 3000);
+		    
 		      				</script>"; 
 		      		} 
 		      	?>	
@@ -130,9 +128,7 @@ class dashboard{
 	      		if(@$mensaje != ''){
 	      			echo "<script>
 	      					mensaje('$mensaje');
-	      					setTimeout(function(){ 
-								window.location.href = 'index.php';
-	      					 }, 3000);
+	      					
 	      				</script>"; 
 	      		} 
 	      	?>	

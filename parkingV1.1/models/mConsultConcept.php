@@ -6,7 +6,7 @@ class ConsultConcepts{
 	public function seeConcept(){
 		$con = new conectar();
 		$conexion = $con->conexion();
-		$sql = "SELECT * FROM conceptoparq WHERE idParq <> 1";
+		$sql = "SELECT * FROM conceptoparq WHERE idParq <> 1 and statusConcept = 1";
 		$result = mysqli_query($conexion,$sql);
 		return mysqli_fetch_all($result);
 	}
